@@ -122,10 +122,21 @@ public class ConsoleManage {
 					}
 					System.out.println(ANSI_YELLOW_BACKGROUND + ANSI_RED + sRetryMsg + ANSI_RESET);
 				} else {
-					rDate[0] = LocalDate.of(0002, 01, 01);
+					try {
+						rDate[0] = LocalDate.of(0002, 01, 01);
 					rDate[1] = LocalDate.of(Integer.parseInt(splitDate[2]), Integer.parseInt(splitDate[1]),
 							Integer.parseInt(splitDate[0]));
 					break;
+					} catch (Exception e) {
+						n++;
+						if (n == iNumTry) {
+							System.out.println(ANSI_BLACK_BACKGROUND + ANSI_RED + errorMsg + ANSI_RESET);
+							rDate[0] = LocalDate.of(0001, 01, 01);
+							break;
+						}
+						System.out.println(ANSI_YELLOW_BACKGROUND + ANSI_RED + sRetryMsg + ANSI_RESET);	
+					}
+					
 				}
 			} else if (splitDate.length != 3){
 				n++;
